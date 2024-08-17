@@ -1,3 +1,7 @@
+## 16-08-2024
+
+- Updated board, added move_piece method and test
+
 ## 15-08-2024
 
 - Added board and tested.
