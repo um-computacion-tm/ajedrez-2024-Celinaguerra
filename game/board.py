@@ -1,5 +1,11 @@
 from game.rook import Rook
 
+class InvalidMoveError(Exception):
+    pass
+
+class InvalidCoordError(Exception):
+    pass
+
 class Board:
     def __init__(self):
         self.__positions__ = []
@@ -16,8 +22,19 @@ class Board:
     def get_piece(self,row,col):
         return self.__positions__[row][col]
 
-##hacer excepcion de lugar incorrecto
+
     def move_piece(self, from_row, from_col, to_row, to_col):
+
+        if not self.are_valid_coords(from_row, from_col, to_row, to_col):
+            raise InvalidCoordError("Invalid coordinates")
+        
         piece = self.get_piece(from_row, from_col)
+        
+        if piece is None:
+            raise InvalidMoveError("No piece at given coordinates")
+        
         self.__positions__[from_row][from_col] = None
         self.__positions__[to_row][to_col] = piece
+
+    def are_valid_coords(self, from_row, from_col, to_row, to_col):
+        return all(0 <= x < 8 for x in [from_row, from_col, to_row, to_col])

@@ -1,3 +1,8 @@
+## 17-08-2024
+
+- added InvalidMoveError, InvalidCoordError and are_valid_coords
+
+
 ## 16-08-2024
 
 - Updated board, added move_piece method and test
