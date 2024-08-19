@@ -1,3 +1,7 @@
+## 18-08-2024
+
+- added class Chess, move, change_turn. Tests
+
 ## 17-08-2024
 
 - added InvalidMoveError, InvalidCoordError and are_valid_coords
