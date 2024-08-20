@@ -1,3 +1,9 @@
+## 19-08-2024
+
+- updated Pawn to board
+
+- added tests to test_chess
+
 ## 18-08-2024
 
 - added class Chess, move, change_turn. Tests

@@ -7,16 +7,25 @@ class TestChess(unittest.TestCase):
         self.chess = Chess()
         self.board = Board()
 
-    def test_move_calls_board_methods(self):
-        from_row, from_col, to_row, to_col = 0, 0, 1, 1
-        self.board.move_piece(0, 0, 0, 0)  # Asegúrate de que haya una pieza en la posición inicial
-        self.chess.move(from_row, from_col, to_row, to_col)
+    def test_move(self):
+        chess = Chess()
+        self.assertEqual(chess.turn, "WHITE")
+        initial_piece = chess.__board__.get_piece(0, 0)
+        chess.move(0, 0, 1, 0)
+        moved_piece = chess.__board__.get_piece(1, 0)
+        self.assertEqual(moved_piece, initial_piece)
+        self.assertIsNone(chess.__board__.get_piece(0, 0))
+        self.assertEqual(chess.turn, "BLACK")
+
+    def test_change_turn(self):
+        chess = Chess()
+        self.assertEqual(chess.turn, "WHITE")
         
-        # Verifica que la pieza se haya movido correctamente
-        piece = self.board.get_piece(to_row, to_col)
-        self.assertIsNotNone(piece)
-        self.assertEqual(piece.__class__.__name__, 'Rook')
-        self.assertIsNone(self.board.get_piece(from_row, from_col))
+        chess.change_turn()
+        self.assertEqual(chess.turn, "BLACK")
+        
+        chess.change_turn()
+        self.assertEqual(chess.turn, "WHITE")
 
     def test_invalid_move_raises_error(self):
         from_row, from_col, to_row, to_col = 0, 0, 8, 8  # Coordenadas inválidas

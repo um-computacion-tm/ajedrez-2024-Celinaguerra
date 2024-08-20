@@ -1,4 +1,5 @@
 from game.rook import Rook
+from game.pawn import Pawn 
 
 class InvalidMoveError(Exception):
     pass
@@ -18,6 +19,10 @@ class Board:
         self.__positions__[0][7] = Rook("BLACK")
         self.__positions__[7][7] = Rook("WHITE")
         self.__positions__[7][0] = Rook("WHITE")
+        for col in range(8):
+            self.__positions__[1][col] = Pawn("BLACK")
+            self.__positions__[6][col] = Pawn("WHITE")
+
 
     def get_piece(self,row,col):
         return self.__positions__[row][col]
@@ -25,7 +30,7 @@ class Board:
 
     def move_piece(self, from_row, from_col, to_row, to_col):
 
-        if not self.are_valid_coords(from_row, from_col, to_row, to_col):
+        if not self._are_valid_coords(from_row, from_col, to_row, to_col):
             raise InvalidCoordError("Invalid coordinates")
         
         piece = self.get_piece(from_row, from_col)
@@ -36,5 +41,5 @@ class Board:
         self.__positions__[from_row][from_col] = None
         self.__positions__[to_row][to_col] = piece
 
-    def are_valid_coords(self, from_row, from_col, to_row, to_col):
+    def _are_valid_coords(self, from_row, from_col, to_row, to_col):
         return all(0 <= x < 8 for x in [from_row, from_col, to_row, to_col])
