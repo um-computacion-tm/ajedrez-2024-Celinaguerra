@@ -1,3 +1,11 @@
+## 21-08-2024
+
+- modified tests, added cli tests
+
+## 20-08-2024
+
+- added cli.py
+
 ## 19-08-2024
 
 - updated Pawn to board

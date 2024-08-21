@@ -33,7 +33,7 @@ class TestChess(unittest.TestCase):
             self.chess.move(from_row, from_col, to_row, to_col)
 
     def test_no_piece_at_start_raises_error(self):
-        from_row, from_col, to_row, to_col = 1, 1, 2, 2  # No hay pieza en la posición inicial
+        from_row, from_col, to_row, to_col = 3, 3, 2, 2  # No hay pieza en la posición inicial
         with self.assertRaises(InvalidMoveError):
             self.chess.move(from_row, from_col, to_row, to_col)
 
