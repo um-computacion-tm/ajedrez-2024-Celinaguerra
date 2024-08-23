@@ -7,6 +7,10 @@ class TestChess(unittest.TestCase):
         self.chess = Chess()
         self.board = Board()
 
+    def test_is_playing(self):
+        chess = Chess()
+        self.assertTrue(chess.is_playing())
+
     def test_move(self):
         chess = Chess()
         self.assertEqual(chess.turn, "WHITE")
