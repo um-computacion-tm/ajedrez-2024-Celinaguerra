@@ -64,3 +64,19 @@ class TestBoard(unittest.TestCase):
         
         with self.assertRaises(InvalidCoordError):
             self.board.move_piece(0, 0, 0, 8) 
+
+    def test_str_board(self):
+        board = Board()
+        self.assertEqual(
+            str(board),
+            (
+                "♖      ♖\n"
+                "♙♙♙♙♙♙♙♙\n"
+                "        \n"
+                "        \n"
+                "        \n"
+                "        \n"
+                "♟♟♟♟♟♟♟♟\n"
+                "♜      ♜\n"
+            )
+        )
