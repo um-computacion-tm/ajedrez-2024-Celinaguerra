@@ -1,6 +1,11 @@
 import unittest
 from game.board import Board, InvalidMoveError, InvalidCoordError
 from game.rook import Rook
+from game.bishop import Bishop
+from game.king import King
+from game.knight import Knight
+from game.queen import Queen
+from game.pawn import Pawn
 
 
 class TestBoard(unittest.TestCase):
@@ -80,3 +85,4 @@ class TestBoard(unittest.TestCase):
                 "♖♘♗♕♔♗♘♖\n"
             )
         )
+

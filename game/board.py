@@ -41,10 +41,6 @@ class Board:
             self.__positions__[6][col] = Pawn("WHITE")
 
 
-    def get_piece(self,row,col):
-        return self.__positions__[row][col]
-
-
     def move_piece(self, from_row, from_col, to_row, to_col):
         if not self._are_valid_coords(from_row, from_col, to_row, to_col):
             raise InvalidCoordError("Invalid coordinates")
