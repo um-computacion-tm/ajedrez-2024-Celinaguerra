@@ -24,3 +24,8 @@ class TestRook(unittest.TestCase):
         rook = Rook('WHITE')
         possibles = rook.possible_positions_hr(4,4)
         self.assertEqual(possibles, [(4,5),(4,6),(4,7)])
+
+    def test_move_horizontal_left(self):
+        rook = Rook('WHITE')
+        possibles = rook.possible_positions_hl(4,4)
+        self.assertEqual(possibles, [(4,3),(4,2),(4,1),(4,0)])

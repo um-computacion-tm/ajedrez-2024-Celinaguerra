@@ -54,17 +54,17 @@ class Board:
         return all(0 <= x < 8 for x in [from_row, from_col, to_row, to_col])
 
     def __str__(self):
-        board_str = ""
-        for row in self.__positions__:
+        board_str = "  " + " ".join(str(i) for i in range(8)) + "\n"
+        for i, row in enumerate(self.__positions__):
+            board_str += str(i) + " "
             for cell in row:
                 if cell is not None:
-                    board_str += str(cell)
+                    board_str += str(cell) + " "
                 else:
-                    board_str += " "
-            board_str += "\n"
+                    board_str += ". "
+            board_str += str(i) + "\n"
+        board_str += "  " + " ".join(str(i) for i in range(8)) + "\n"
         return board_str
-
-
 
     def get_piece(self, row, col):
         return self.__positions__[row][col]

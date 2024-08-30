@@ -6,9 +6,6 @@ class Rook(Piece):
     white_str = '♖'
     black_str = '♜'
 
-    def __str__(self):
-        return '♖' if self.__color__ == 'WHITE' else '♜'
-
     def possible_positions_vd(self,row,col):
         #la columna es igual, recorrer filas (mayor)
         possibles = []
@@ -25,5 +22,11 @@ class Rook(Piece):
     def possible_positions_hr(self,row,col):
         possibles = []
         for next_col in range (col + 1, 8):
+            possibles.append((row, next_col))
+        return possibles
+
+    def possible_positions_hl(self,row,col):
+        possibles = []
+        for next_col in range (col - 1, -1,-1):
             possibles.append((row, next_col))
         return possibles
