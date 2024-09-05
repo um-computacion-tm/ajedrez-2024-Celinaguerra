@@ -48,14 +48,18 @@ class Board:
         piece = self.get_piece(from_row, from_col)
         if piece is None:
             raise InvalidMoveError("No piece at given coordinates")
-        self.__positions__[from_row][from_col] = None
-        self.__positions__[to_row][to_col] = piece
+        self.set_piece(to_row, to_col, piece)
+        self.set_piece(from_row, from_col, None)
+
 
     def _are_valid_coords(self, from_row, from_col, to_row, to_col):
         return all(0 <= x < 8 for x in [from_row, from_col, to_row, to_col])
 
     def get_piece(self, row, col):
         return self.__positions__[row][col]
+
+    def set_piece(self, row, col, piece):
+        self.__positions__[row][col] = piece
 
     def __str__(self):
         board_str = "  " + " ".join(str(i) for i in range(8)) + "\n"

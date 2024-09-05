@@ -1,6 +1,8 @@
 import unittest
 from game.rook import Rook
 from game.board import Board
+from game.pawn import Pawn
+
 
 class TestRook(unittest.TestCase):
     def test_str_white(self):
@@ -9,7 +11,7 @@ class TestRook(unittest.TestCase):
         self.assertEqual(str(rook), '♖')
 
     def test_move_vertical_desc(self):
-        board = Board()
+        board = Board(for_test=True)
         rook = Rook('WHITE',board)
         #param
         #lugar de la torre
@@ -41,3 +43,37 @@ class TestRook(unittest.TestCase):
         rook = Rook('WHITE',board)
         possibles = rook.valid_positions(4,4,4,0)
         self.assertEqual(possibles, True)
+
+    def test_move_vertical_desc_with_own_piece(self):
+        board = Board()
+        board.set_piece(6, 1, Pawn("WHITE", board))
+        rook = Rook("WHITE", board)
+        board.set_piece(4, 1, rook)
+        possibles = rook.possible_positions_vd(4, 1)
+        self.assertEqual(
+            possibles,
+            [(5, 1)]
+        )
+
+    def test_move_vertical_desc_with_not_own_piece(self):
+        board = Board()
+        board.set_piece(6, 1, Pawn("BLACK", board))
+        rook = Rook("WHITE", board)
+        board.set_piece(4, 1, rook)
+        possibles = rook.possible_positions_vd(4, 1)
+        self.assertEqual(
+            possibles,
+            [(5, 1), (6, 1)]
+        )
+
+    def test_move_diagonal_desc(self):
+        board = Board()
+        rook = board.get_piece(col=0, row=0)
+        is_possible = rook.valid_positions(
+            from_row=0,
+            from_col=0,
+            to_row=1,
+            to_col=1,
+        )
+
+        self.assertFalse(is_possible)

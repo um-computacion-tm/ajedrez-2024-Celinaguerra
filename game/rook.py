@@ -16,6 +16,11 @@ class Rook(Piece):
         #la columna es igual, recorrer filas (mayor)
         possibles = []
         for next_row in range (row + 1, 8):
+            other_piece = self.__board__.get_piece(next_row,col)
+            if other_piece is not None:
+                if other_piece.__color__ != self.__color__:
+                    possibles.append((next_row,col))
+                break
             possibles.append((next_row,col))
         return possibles
 
