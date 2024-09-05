@@ -6,6 +6,50 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.1.9] - 2024-09-04
+### Added
+
+- Differentation between enemy and own color for eating pieces.
+- tests
+
+## [0.1.8] - 2024-09-03
+### Changed
+
+- changed atribute board to pieces
+- fixed tests
+
+
+## [0.1.7] - 2024-09-02
+### Added
+
+- diagonal right movements to bishop and tests
+
+## [0.1.6] - 2024-09-01
+### Added
+
+- valid_possitions to rook and queen
+- added tests
+
+## [0.1.5] - 2024-08-29
+### Added
+
+- possible_positions_hl to rook
+
+### Changed
+
+- updated board.__str__ and tests (not working)
+- added white_str and black_str to all pieces
+
+## [0.1.4] - 2024-08-28
+### Added
+
+- added possible_positions_vd and hr to rook
+- added test
+- white_str and black_str to piece and rook
+
+
+###################
+
 ## [0.1.3] - 2024-08-27
 ### Added
 
