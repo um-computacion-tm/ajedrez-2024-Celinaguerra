@@ -4,13 +4,8 @@ from game.bishop import Bishop
 from game.queen import Queen
 from game.king import King
 from game.knight import Knight 
+from game.exceptions import OutOfBoard
 
-
-class InvalidMoveError(Exception):
-    pass
-
-class InvalidCoordError(Exception):
-    pass
 
 class Board:
     def __init__(self, for_test = False):
@@ -42,20 +37,16 @@ class Board:
                 self.__positions__[6][col] = Pawn("WHITE",self)
 
 
-    def move_piece(self, from_row, from_col, to_row, to_col):
-        if not self._are_valid_coords(from_row, from_col, to_row, to_col):
-            raise InvalidCoordError("Invalid coordinates")
-        piece = self.get_piece(from_row, from_col)
-        if piece is None:
-            raise InvalidMoveError("No piece at given coordinates")
-        self.set_piece(to_row, to_col, piece)
+    def move(self, from_row, from_col, to_row, to_col):
+        origin = self.get_piece(from_row, from_col)
+        self.set_piece(to_row, to_col, origin)
         self.set_piece(from_row, from_col, None)
 
-
-    def _are_valid_coords(self, from_row, from_col, to_row, to_col):
-        return all(0 <= x < 8 for x in [from_row, from_col, to_row, to_col])
-
     def get_piece(self, row, col):
+        if not (
+            0 <= row < 8 or 0 <= col < 8
+        ):
+            raise OutOfBoard()
         return self.__positions__[row][col]
 
     def set_piece(self, row, col, piece):
