@@ -6,7 +6,7 @@ from game.king import King
 from game.knight import Knight
 from game.queen import Queen
 from game.pawn import Pawn
-
+from game.exceptions import *
 
 class TestBoard(unittest.TestCase):
     def test_initial_positions_rook(self):
@@ -37,14 +37,15 @@ class TestBoard(unittest.TestCase):
         self.assertIsInstance(board.get_piece(1, 1), Rook)
         self.assertIsNone(board.get_piece(0, 1))
 
-    # def test_move_piece_no_piece(self):
-    #     # Mover una pieza desde una posición inicial válida a otra posición válida
-    #     try:
-    #         self.board.move_piece(0, 0, 0, 1)
-    #         self.assertIsInstance(self.board.get_piece(0, 1), Rook)
-    #         self.assertIsNone(self.board.get_piece(0, 0))
-    #     except InvalidMoveError as e:
-    #         self.fail(f"move_piece() raised InvalidMoveError unexpectedly! {e}")
+    def test_move_piece_no_piece(self):
+        board = Board()
+        # Mover una pieza desde una posición inicial válida a otra posición válida
+        try:
+            board.move(0, 0, 0, 1)
+            self.assertIsInstance(board.get_piece(0, 1), Rook)
+            self.assertIsNone(board.get_piece(0, 0))
+        except InvalidMove as e:
+            self.fail(f"move_piece() raised InvalidMoveError unexpectedly! {e}")
 
         # Mover la misma pieza a otra posición
         # try:
