@@ -4,6 +4,11 @@ class Bishop(Piece):
     white_str = '♗'
     black_str = '♝'
 
+    def valid_positions_diagonal(self, from_row, from_col, to_row, to_col):
+        possible_positions = (self.possible_positions_rd(from_row, from_col) + self.possible_positions_ru(from_row, from_col) +
+                            self.possible_positions_ld(from_row, from_col) + self.possible_positions_lu(from_row, from_col))
+        return (to_row, to_col) in possible_positions
+
     def possible_positions_rd(self, row, col):
         # Diagonal descendente (hacia abajo a la derecha)
         possibles = []
