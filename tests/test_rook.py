@@ -39,9 +39,9 @@ class TestRook(unittest.TestCase):
         self.assertEqual(possibles, [(4,3),(4,2),(4,1),(4,0)])
 
     def test_move_general(self):
-        board = Board()
+        board = Board(for_test=True)
         rook = Rook('WHITE',board)
-        possibles = rook.valid_positions(4,4,4,0)
+        possibles = rook.get_possible_positions(4,4,4,0)
         self.assertEqual(possibles, True)
 
     def test_move_vertical_desc_with_own_piece(self):
