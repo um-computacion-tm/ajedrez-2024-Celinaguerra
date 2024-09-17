@@ -37,7 +37,7 @@ class TestBishop(unittest.TestCase):
     def test_move_all_possible_positions(self):
         board = Board(for_test=True)
         bishop = Bishop('WHITE', board)
-        possibles = bishop.valid_positions_diagonal(4,4,7,7)
+        possibles = bishop.get_possible_positions(4,4)
         self.assertEqual = (possibles, True)
 
 
@@ -47,8 +47,8 @@ class TestBishop(unittest.TestCase):
         pawn = Pawn('BLACK', board)
         board.set_piece(5,5, pawn)
         board.set_piece(1,1, bishop)
-        possibles = bishop.valid_positions_diagonal(1,1,5,5)
-        self.assertEqual(possibles, True)
+        possibles = bishop.get_possible_positions(1,1)
+        self.assertEqual(possibles, [(2, 2), (3, 3), (4, 4), (5, 5), (0, 2), (2, 0), (0, 0)])
 
     def test_move_diag_left_down_other_piece(self):
         board = Board(for_test=True)
