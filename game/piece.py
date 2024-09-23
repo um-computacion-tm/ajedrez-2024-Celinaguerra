@@ -26,113 +26,102 @@ class Piece:
 
     def possible_diagonal_positions(self, from_row, from_col):
         return (
-            self.possible_positions_rd(from_row, from_col) +
-            self.possible_positions_ru(from_row, from_col) +
-            self.possible_positions_ld(from_row, from_col) +
-            self.possible_positions_lu(from_row, from_col)
+            self.diag_possible_positions(from_row, from_col, 1, 1) +  # diagonal descendente derecha
+            self.diag_possible_positions(from_row, from_col, -1, 1) +  # diagonal ascendente derecha
+            self.diag_possible_positions(from_row, from_col, 1, -1) +  # diagonal descendente izquierda
+            self.diag_possible_positions(from_row, from_col, -1, -1)  # diagonal ascendente izquierda
         )
 
-    def possible_positions_rd(self, row, col):
-        # Diagonal descendente (hacia abajo a la derecha)
+    def diag_possible_positions(self, row, col, row_step, col_step):
         possibles = []
-        for next_row, next_col in zip(range(row + 1, 8), range(col + 1, 8)):
+        next_row, next_col = row + row_step, col + col_step
+        while 0 <= next_row < 8 and 0 <= next_col < 8:
             other_piece = self.__board__.get_piece(next_row, next_col)
             if other_piece is not None:
                 if other_piece.__color__ != self.__color__:
                     possibles.append((next_row, next_col))
                 break
             possibles.append((next_row, next_col))
+            next_row += row_step
+            next_col += col_step
         return possibles
 
-    def possible_positions_ru(self, row, col):
-        # Diagonal ascendente (hacia arriba a la derecha)
-        possibles = []
-        for next_row, next_col in zip(range(row - 1, -1, -1), range(col + 1, 8)):
-            other_piece = self.__board__.get_piece(next_row, next_col)
-            if other_piece is not None:
-                if other_piece.__color__ != self.__color__:
-                    possibles.append((next_row, next_col))
-                break
-            possibles.append((next_row, next_col))
-        return possibles
+    # def possible_diagonal_positions(self, from_row, from_col):
+    #     return (
+    #         self.possible_positions_rd(from_row, from_col) +
+    #         self.possible_positions_ru(from_row, from_col) +
+    #         self.possible_positions_ld(from_row, from_col) +
+    #         self.possible_positions_lu(from_row, from_col)
+    #     )
 
-    def possible_positions_ld(self, row, col):
-        # Diagonal descendente (hacia abajo a la izquierda)
-        possibles = []
-        for next_row, next_col in zip(range(row + 1, 8), range(col - 1, -1, -1)):
-            other_piece = self.__board__.get_piece(next_row, next_col)
-            if other_piece is not None:
-                if other_piece.__color__ != self.__color__:
-                    possibles.append((next_row, next_col))
-                break
-            possibles.append((next_row, next_col))
-        return possibles
+    # def possible_positions_rd(self, row, col):
+    #     # Diagonal descendente (hacia abajo a la derecha)
+    #     possibles = []
+    #     for next_row, next_col in zip(range(row + 1, 8), range(col + 1, 8)):
+    #         other_piece = self.__board__.get_piece(next_row, next_col)
+    #         if other_piece is not None:
+    #             if other_piece.__color__ != self.__color__:
+    #                 possibles.append((next_row, next_col))
+    #             break
+    #         possibles.append((next_row, next_col))
+    #     return possibles
 
-    def possible_positions_lu(self, row, col):
-        # Diagonal ascendente (hacia arriba a la izquierda)
-        possibles = []
-        for next_row, next_col in zip(range(row - 1, -1, -1), range(col - 1, -1, -1)):
-            other_piece = self.__board__.get_piece(next_row, next_col)
-            if other_piece is not None:
-                if other_piece.__color__ != self.__color__:
-                    possibles.append((next_row, next_col))
-                break
-            possibles.append((next_row, next_col))
-        return possibles
+    # def possible_positions_ru(self, row, col):
+    #     # Diagonal ascendente (hacia arriba a la derecha)
+    #     possibles = []
+    #     for next_row, next_col in zip(range(row - 1, -1, -1), range(col + 1, 8)):
+    #         other_piece = self.__board__.get_piece(next_row, next_col)
+    #         if other_piece is not None:
+    #             if other_piece.__color__ != self.__color__:
+    #                 possibles.append((next_row, next_col))
+    #             break
+    #         possibles.append((next_row, next_col))
+    #     return possibles
+
+    # def possible_positions_ld(self, row, col):
+    #     # Diagonal descendente (hacia abajo a la izquierda)
+    #     possibles = []
+    #     for next_row, next_col in zip(range(row + 1, 8), range(col - 1, -1, -1)):
+    #         other_piece = self.__board__.get_piece(next_row, next_col)
+    #         if other_piece is not None:
+    #             if other_piece.__color__ != self.__color__:
+    #                 possibles.append((next_row, next_col))
+    #             break
+    #         possibles.append((next_row, next_col))
+    #     return possibles
+
+    # def possible_positions_lu(self, row, col):
+    #     # Diagonal ascendente (hacia arriba a la izquierda)
+    #     possibles = []
+    #     for next_row, next_col in zip(range(row - 1, -1, -1), range(col - 1, -1, -1)):
+    #         other_piece = self.__board__.get_piece(next_row, next_col)
+    #         if other_piece is not None:
+    #             if other_piece.__color__ != self.__color__:
+    #                 possibles.append((next_row, next_col))
+    #             break
+    #         possibles.append((next_row, next_col))
+    #     return possibles
 
 ############################################### ORTOGONAL
 
     def possible_orthogonal_positions(self, from_row, from_col):
         return (
-            self.possible_positions_vd(from_row, from_col) +
-            self.possible_positions_va(from_row, from_col) +
-            self.possible_positions_hr(from_row, from_col) +
-            self.possible_positions_hl(from_row, from_col)
+            self.orth_possible_positions(from_row, from_col, 1, 0) +  # vertical down
+            self.orth_possible_positions(from_row, from_col, -1, 0) +  # vertical asc
+            self.orth_possible_positions(from_row, from_col, 0, 1) +  # horizontal right
+            self.orth_possible_positions(from_row, from_col, 0, -1)  # horizontal left
         )
 
-    def possible_positions_vd(self,row,col):
-        #la columna es igual, recorrer filas (mayor)
+    def orth_possible_positions(self, row, col, row_step, col_step):
         possibles = []
-        for next_row in range (row + 1, 8):
-            other_piece = self.__board__.get_piece(next_row,col)
+        next_row, next_col = row + row_step, col + col_step
+        while 0 <= next_row < 8 and 0 <= next_col < 8:
+            other_piece = self.__board__.get_piece(next_row, next_col)
             if other_piece is not None:
                 if other_piece.__color__ != self.__color__:
-                    possibles.append((next_row,col))
+                    possibles.append((next_row, next_col))
                 break
-            possibles.append((next_row,col))
+            possibles.append((next_row, next_col))
+            next_row += row_step
+            next_col += col_step
         return possibles
-
-    def possible_positions_va(self,row,col):
-        possibles = []
-        for next_row in range (row - 1, -1, -1):
-            other_piece = self.__board__.get_piece(next_row,col)
-            if other_piece is not None:
-                if other_piece.__color__ != self.__color__:
-                    possibles.append((next_row,col))
-                break
-            possibles.append((next_row,col))
-        return possibles
-
-    def possible_positions_hr(self,row,col):
-        possibles = []
-        for next_col in range (col + 1, 8):
-            other_piece = self.__board__.get_piece(row,next_col)
-            if other_piece is not None:
-                if other_piece.__color__ != self.__color__:
-                    possibles.append((row,next_col))
-                break
-            possibles.append((row, next_col))
-        return possibles
-
-    def possible_positions_hl(self,row,col):
-        possibles = []
-        for next_col in range (col - 1, -1,-1):
-            other_piece = self.__board__.get_piece(row,next_col)
-            if other_piece is not None:
-                if other_piece.__color__ != self.__color__:
-                    possibles.append((row,next_col))
-                break
-            possibles.append((row, next_col))
-        return possibles
-
-################################

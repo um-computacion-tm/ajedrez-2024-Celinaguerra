@@ -17,25 +17,25 @@ class TestRook(unittest.TestCase):
         #lugar de la torre
         #final de la torre
         #verificar
-        possibles = rook.possible_positions_vd(4,1)
+        possibles = rook.orth_possible_positions(4,1,1,0)
         self.assertEqual(possibles, [(5,1),(6,1),(7,1)])
 
     def test_move_vertical_asc(self):
         board = Board(for_test=True)
         rook = Rook('WHITE',board)
-        possibles = rook.possible_positions_va(4,2)
+        possibles = rook.orth_possible_positions(4,2,-1,0)
         self.assertEqual(possibles, [(3,2),(2,2),(1,2),(0,2)])
 
     def test_move_horizontal_right(self):
         board = Board(for_test=True)
         rook = Rook('WHITE',board)
-        possibles = rook.possible_positions_hr(4,4)
+        possibles = rook.orth_possible_positions(4,4,0,1)
         self.assertEqual(possibles, [(4,5),(4,6),(4,7)])
 
     def test_move_horizontal_left(self):
         board = Board(for_test=True)
         rook = Rook('WHITE',board)
-        possibles = rook.possible_positions_hl(4,4)
+        possibles = rook.orth_possible_positions(4,4,0,-1)
         self.assertEqual(possibles, [(4,3),(4,2),(4,1),(4,0)])
 
     def test_move_general(self):
@@ -49,7 +49,7 @@ class TestRook(unittest.TestCase):
         board.set_piece(6, 1, Pawn("WHITE", board))
         rook = Rook("WHITE", board)
         board.set_piece(4, 1, rook)
-        possibles = rook.possible_positions_vd(4, 1)
+        possibles = rook.orth_possible_positions(4,1,1,0)
         self.assertEqual(
             possibles,
             [(5, 1)]
@@ -60,7 +60,7 @@ class TestRook(unittest.TestCase):
         board.set_piece(6, 1, Pawn("BLACK", board))
         rook = Rook("WHITE", board)
         board.set_piece(4, 1, rook)
-        possibles = rook.possible_positions_vd(4, 1)
+        possibles = rook.orth_possible_positions(4, 1,1,0)
         self.assertEqual(
             possibles,
             [(5, 1), (6, 1)]
