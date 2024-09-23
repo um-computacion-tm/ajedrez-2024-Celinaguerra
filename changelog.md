@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - king tests
 
+## Changed
+
+- bishop tests
+
 ## [0.1.17] - 2024-09-17
 ### Changed
 
