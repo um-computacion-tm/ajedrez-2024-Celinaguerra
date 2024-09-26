@@ -4,7 +4,7 @@ from game.board import Board
 from game.pawn import Pawn  
 
 
-class TestBishop(unittest.TestCase):
+class TestKing(unittest.TestCase):
     def test_move_correct_position(self):
         board = Board(for_test=True)
         king = King('WHITE', board)

@@ -15,39 +15,25 @@ class Pawn(Piece):
         return possibles
 
     def get_possible_positions_eat(self, from_row, from_col):
-        if self.__color__ == "BLACK":
-            other_piece = self.__board__.get_piece(from_row + 1, from_col + 1)
-            if other_piece and other_piece.__color__ == "WHITE":
-                return [(from_row + 1, from_col + 1)]
+        direction = 1 if self.__color__ == "BLACK" else -1
+        enemy_color = "WHITE" if self.__color__ == "BLACK" else "BLACK"
+        positions = []
 
-        return []
+        for col_offset in [-1, 1]:
+            other_piece = self.__board__.get_piece(from_row + direction, from_col + col_offset)
+            if other_piece and other_piece.__color__ == enemy_color:
+                positions.append((from_row + direction, from_col + col_offset))
+
+        return positions
 
     def get_possible_positions_move(self, from_row, from_col):
-        if self.__color__ == "BLACK":
-            if self.__board__.get_piece(from_row + 1, from_col) is None:
-                if (
-                    from_row == 1 and
-                    self.__board__.get_piece(from_row + 2, from_col) is None
-                ):
-                    return [
-                        (from_row + 1, from_col),
-                        (from_row + 2, from_col)
-                    ]
-                else:
-                    return [
-                        (from_row + 1, from_col),
-                    ]
-        else:
-            if from_row == 6:
-                return [
-                    (from_row - 1, from_col),
-                    (from_row - 2, from_col)
-                ]
-            else:
-                if self.__board__.get_piece(from_row - 1, from_col) is None:
-                    return [
-                        (from_row - 1, from_col),
-                    ]
-                else:
-                    return []
-        return []
+        direction = 1 if self.__color__ == "BLACK" else -1
+        start_row = 1 if self.__color__ == "BLACK" else 6
+        positions = []
+
+        if self.__board__.get_piece(from_row + direction, from_col) is None:
+            positions.append((from_row + direction, from_col))
+            if from_row == start_row and self.__board__.get_piece(from_row + 2 * direction, from_col) is None:
+                positions.append((from_row + 2 * direction, from_col))
+
+        return positions
