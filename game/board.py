@@ -52,15 +52,26 @@ class Board:
     def set_piece(self, row, col, piece):
         self.__positions__[row][col] = piece
 
+    # def __str__(self):
+    #     board_str = "  " + " ".join(str(i) for i in range(8)) + "\n"
+    #     for i, row in enumerate(self.__positions__):
+    #         board_str += str(i) + " "
+    #         for cell in row:
+    #             if cell is not None:
+    #                 board_str += str(cell) + " "
+    #             else:
+    #                 board_str += ". "
+    #         board_str += str(i) + "\n"
+    #     board_str += "  " + " ".join(str(i) for i in range(8)) + "\n"
+    #     return board_str
+
     def __str__(self):
-        board_str = "  " + " ".join(str(i) for i in range(8)) + "\n"
+        header_footer = "  " + " ".join(str(i) for i in range(8)) + "\n"
+        board_str = header_footer
         for i, row in enumerate(self.__positions__):
             board_str += str(i) + " "
             for cell in row:
-                if cell is not None:
-                    board_str += str(cell) + " "
-                else:
-                    board_str += ". "
+                board_str += str(cell) + " " if cell is not None else ". "
             board_str += str(i) + "\n"
-        board_str += "  " + " ".join(str(i) for i in range(8)) + "\n"
+        board_str += header_footer
         return board_str
