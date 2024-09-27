@@ -1,0 +1,3 @@
+- excepciones peon
+- peon al final es reina
+- empate
