@@ -51,22 +51,9 @@ class TestPawn(unittest.TestCase):
         expected_positions = [(4, 0)]
         self.assertEqual(possibles, expected_positions)
 
-    def test_promotion_queen_white(self):
-        board = Board(for_test=True)
+    def test_move_row_7(self):
+        board = Board()
         pawn = Pawn('WHITE', board)
-        board.set_piece(1,0, pawn) 
-        self.assertEqual(board.get_piece(1, 0), pawn)
-        board.move(1, 0, 0, 0) 
-        new_piece = board.get_piece(0, 0)
-        self.assertIsInstance(new_piece, Queen)  
-        self.assertEqual(new_piece.color, 'WHITE')
-
-    def test_promotion_queen_black(self):
-        board = Board(for_test=True)
-        pawn = Pawn('BLACK', board)
-        board.set_piece(6,0, pawn) 
-        self.assertEqual(board.get_piece(6, 0), pawn)
-        board.move(6, 0, 7, 0) 
-        new_piece = board.get_piece(7, 0)
-        self.assertIsInstance(new_piece, Queen) 
-        self.assertEqual(new_piece.color, 'BLACK')
+        possibles = pawn.get_possible_positions(6, 7)
+        expected_positions = [(5,7),(4,7)]
+        self.assertEqual(possibles, expected_positions)

@@ -5,10 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.23] - 2024-09-28
-### Added
+## [0.1.24] - 2024-09-29
+### Changed
 
-- pawn promotion testing
+- modified get_possible_positions_eat so next_col doesnt surprass board limits
+
+## [0.1.23] - 2024-09-28
+### Changed
+
+- board move method to include pawn promotion (not working)
 
 ## [0.1.22] - 2024-09-26
 ### Added
