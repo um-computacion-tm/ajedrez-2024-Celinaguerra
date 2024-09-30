@@ -37,9 +37,9 @@ class Piece:
                 next_col += col_step
         return possibles
 
-    def possible_diagonal_positions(self, from_row, from_col):
-        directions = [(1, 1), (-1, 1), (1, -1), (-1, -1)]  # Diagonales
-        return self.possible_positions(from_row, from_col, directions)
+    # def possible_diagonal_positions(self, from_row, from_col):
+    #     directions = [(1, 1), (-1, 1), (1, -1), (-1, -1)]  # Diagonales
+    #     return self.possible_positions(from_row, from_col, directions)
 
     def possible_orthogonal_positions(self, from_row, from_col):
         directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]  # Ortogonales
@@ -47,27 +47,27 @@ class Piece:
 
 # ############################################### DIAGONAL
 
-#     def possible_diagonal_positions(self, from_row, from_col):
-#         return (
-#             self.diag_possible_positions(from_row, from_col, 1, 1) +  # diagonal descendente derecha
-#             self.diag_possible_positions(from_row, from_col, -1, 1) +  # diagonal ascendente derecha
-#             self.diag_possible_positions(from_row, from_col, 1, -1) +  # diagonal descendente izquierda
-#             self.diag_possible_positions(from_row, from_col, -1, -1)  # diagonal ascendente izquierda
-#         )
+    def possible_diagonal_positions(self, from_row, from_col):
+        return (
+            self.diag_possible_positions(from_row, from_col, 1, 1) +  # diagonal descendente derecha
+            self.diag_possible_positions(from_row, from_col, -1, 1) +  # diagonal ascendente derecha
+            self.diag_possible_positions(from_row, from_col, 1, -1) +  # diagonal descendente izquierda
+            self.diag_possible_positions(from_row, from_col, -1, -1)  # diagonal ascendente izquierda
+        )
 
-#     def diag_possible_positions(self, row, col, row_step, col_step):
-#         possibles = []
-#         next_row, next_col = row + row_step, col + col_step
-#         while 0 <= next_row < 8 and 0 <= next_col < 8:
-#             other_piece = self.__board__.get_piece(next_row, next_col)
-#             if other_piece is not None:
-#                 if other_piece.__color__ != self.__color__:
-#                     possibles.append((next_row, next_col))
-#                 break
-#             possibles.append((next_row, next_col))
-#             next_row += row_step
-#             next_col += col_step
-#         return possibles
+    def diag_possible_positions(self, row, col, row_step, col_step):
+        possibles = []
+        next_row, next_col = row + row_step, col + col_step
+        while 0 <= next_row < 8 and 0 <= next_col < 8:
+            other_piece = self.__board__.get_piece(next_row, next_col)
+            if other_piece is not None:
+                if other_piece.__color__ != self.__color__:
+                    possibles.append((next_row, next_col))
+                break
+            possibles.append((next_row, next_col))
+            next_row += row_step
+            next_col += col_step
+        return possibles
 
 # ############################################### ORTOGONAL
 

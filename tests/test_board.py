@@ -86,3 +86,22 @@ class TestBoard(unittest.TestCase):
             )
         )
 
+    def test_promotion_queen_white(self):
+        board = Board(for_test=True)
+        pawn = Pawn('WHITE', board)
+        board.set_piece(1, 0, pawn)  # Coloca el peón en la fila 1
+        self.assertEqual(board.get_piece(1, 0), pawn)
+        board.move(1, 0, 0, 0)  # Mueve el peón a la fila 0
+        new_piece = board.get_piece(0, 0)
+        self.assertIsInstance(new_piece, Queen)  # Verifica que la nueva pieza sea una reina
+        self.assertEqual(new_piece.__color__, 'WHITE')  # Verifica que la reina sea blanca
+
+    def test_promotion_queen_black(self):
+        board = Board(for_test=True)
+        pawn = Pawn('BLACK', board)
+        board.set_piece(6, 0, pawn)  # Coloca el peón en la fila 6
+        self.assertEqual(board.get_piece(6, 0), pawn)
+        board.move(6, 0, 7, 0)  # Mueve el peón a la fila 7
+        new_piece = board.get_piece(7, 0)
+        self.assertIsInstance(new_piece, Queen)  # Verifica que la nueva pieza sea una reina
+        self.assertEqual(new_piece.__color__, 'BLACK')  # Verifica que la reina sea negra

@@ -1,3 +1,2 @@
-- excepciones peon
-- peon al final es reina
+- excepciones movimiento peon
 - empate

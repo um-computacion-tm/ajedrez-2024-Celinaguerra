@@ -21,9 +21,11 @@ class Pawn(Piece):
         positions = []
 
         for col_offset in [-1, 1]:
-            other_piece = self.__board__.get_piece(from_row + direction, from_col + col_offset)
-            if other_piece and other_piece.__color__ == enemy_color:
-                positions.append((from_row + direction, from_col + col_offset))
+            new_col = from_col + col_offset
+            if 0 <= new_col <= 7:  # Verificar que la nueva columna esté dentro del rango
+                other_piece = self.__board__.get_piece(from_row + direction, new_col)
+                if other_piece and other_piece.__color__ == enemy_color:
+                    positions.append((from_row + direction, new_col))
 
         return positions
 
