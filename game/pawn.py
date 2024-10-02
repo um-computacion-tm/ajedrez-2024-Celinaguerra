@@ -43,5 +43,4 @@ class Pawn(Piece):
             # Promoción a reina
             if next_row == end_row:
                 self.__board__.set_piece(next_row, from_col, Queen(self.__color__, self.__board__))
-
         return positions

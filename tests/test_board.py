@@ -47,27 +47,6 @@ class TestBoard(unittest.TestCase):
         except InvalidMove as e:
             self.fail(f"move_piece() raised InvalidMoveError unexpectedly! {e}")
 
-        # Mover la misma pieza a otra posición
-        # try:
-        #     self.board.move_piece(0, 1, 1, 1)
-        #     self.assertIsInstance(self.board.get_piece(1, 1), Rook)
-        #     self.assertIsNone(self.board.get_piece(0, 1))
-        # except InvalidMoveError as e:
-        #     self.fail(f"move_piece() raised InvalidMoveError unexpectedly! {e}")
-
-    # def test_invalid_move_no_piece(self):
-    #     # Intentar mover una pieza desde una posición vacía debería lanzar InvalidMoveError
-    #     with self.assertRaises(InvalidMoveError):
-    #         self.board.move_piece(3, 3, 4, 4)  # No hay pieza en (3, 3)
-
-    # def test_invalid_move_out_of_bounds(self):
-    #     # Intentar mover una pieza fuera de los límites debería lanzar InvalidMoveError
-    #     with self.assertRaises(InvalidCoordError):
-    #         self.board.move_piece(0, 0, -1, 0)  # Movimiento fuera de los límites
-        
-    #     with self.assertRaises(InvalidCoordError):
-    #         self.board.move_piece(0, 0, 0, 8) 
-
     def test_str_board(self):
         board = Board()
         self.assertEqual(
@@ -105,3 +84,19 @@ class TestBoard(unittest.TestCase):
         new_piece = board.get_piece(7, 0)
         self.assertIsInstance(new_piece, Queen)  # Verifica que la nueva pieza sea una reina
         self.assertEqual(new_piece.__color__, 'BLACK')  # Verifica que la reina sea negra
+
+    def test_is_king_alive(self):
+        board = Board()
+        self.assertTrue(board.is_king_alive('WHITE'))
+        self.assertTrue(board.is_king_alive('BLACK'))
+
+        board = Board(for_test=False)
+        self.assertTrue(board.is_king_alive('WHITE'))
+        self.assertTrue(board.is_king_alive('BLACK'))
+
+        board = Board(for_test=True)
+        self.assertFalse(board.is_king_alive('WHITE'))
+        self.assertFalse(board.is_king_alive('BLACK'))
+
+if __name__ == "__main__":
+    unittest.main()
