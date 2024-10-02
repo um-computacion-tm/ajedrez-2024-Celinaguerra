@@ -26,15 +26,16 @@ class Piece:
         possibles = []
         for row_step, col_step in directions:
             next_row, next_col = from_row + row_step, from_col + col_step
-            while 0 <= next_row < 8 and 0 <= next_col < 8:
-                other_piece = self.__board__.get_piece(next_row, next_col)
-                if other_piece is not None:
-                    if other_piece.__color__ != self.__color__:
-                        possibles.append((next_row, next_col))
-                    break
-                possibles.append((next_row, next_col))
-                next_row += row_step
-                next_col += col_step
+            # while 0 <= next_row < 8 and 0 <= next_col < 8:
+            #     other_piece = self.__board__.get_piece(next_row, next_col)
+            #     if other_piece is not None:
+            #         if other_piece.__color__ != self.__color__:
+            #             possibles.append((next_row, next_col))
+            #         break
+            #     possibles.append((next_row, next_col))
+            #     next_row += row_step
+            #     next_col += col_step
+            self.in_board_and_color_validation(possibles, next_row, next_col, row_step, col_step)
         return possibles
 
     # def possible_diagonal_positions(self, from_row, from_col):
@@ -58,15 +59,16 @@ class Piece:
     def diag_possible_positions(self, row, col, row_step, col_step):
         possibles = []
         next_row, next_col = row + row_step, col + col_step
-        while 0 <= next_row < 8 and 0 <= next_col < 8:
-            other_piece = self.__board__.get_piece(next_row, next_col)
-            if other_piece is not None:
-                if other_piece.__color__ != self.__color__:
-                    possibles.append((next_row, next_col))
-                break
-            possibles.append((next_row, next_col))
-            next_row += row_step
-            next_col += col_step
+        # while 0 <= next_row < 8 and 0 <= next_col < 8:
+        #     other_piece = self.__board__.get_piece(next_row, next_col)
+        #     if other_piece is not None:
+        #         if other_piece.__color__ != self.__color__:
+        #             possibles.append((next_row, next_col))
+        #         break
+        #     possibles.append((next_row, next_col))
+        #     next_row += row_step
+        #     next_col += col_step
+        self.in_board_and_color_validation(possibles, next_row, next_col, row_step, col_step)
         return possibles
 
 # ############################################### ORTOGONAL
@@ -92,3 +94,14 @@ class Piece:
 #             next_row += row_step
 #             next_col += col_step
 #         return possibles
+
+    def in_board_and_color_validation(self, possibles, next_row, next_col, row_step, col_step):
+        while 0 <= next_row < 8 and 0 <= next_col < 8:
+            other_piece = self.__board__.get_piece(next_row, next_col)
+            if other_piece is not None:
+                if other_piece.__color__ != self.__color__:
+                    possibles.append((next_row, next_col))
+                break
+            possibles.append((next_row, next_col))
+            next_row += row_step
+            next_col += col_step
