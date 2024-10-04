@@ -11,3 +11,8 @@ class EmptyPosition(InvalidMove):
 
 class OutOfBoard(InvalidMove):
     message = "La posicion indicada se encuentra fuera del tablero"
+
+class GameAlreadyEnded(Exception):
+    message = "El juego ya ha terminado"
+    def __str__(self):
+        return self.message

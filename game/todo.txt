@@ -1,2 +1,1 @@
-- excepciones movimiento peon
 - empate
