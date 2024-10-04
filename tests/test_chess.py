@@ -1,8 +1,9 @@
 import unittest
 from game.chess import Chess
 from game.board import Board
-from game.exceptions import InvalidMove, OutOfBoard, EmptyPosition, InvalidTurn
+from game.exceptions import InvalidMove, OutOfBoard, EmptyPosition, InvalidTurn, GameAlreadyEnded
 from game.rook import Rook
+from game.king import King
 
 class TestChess(unittest.TestCase):
     def setUp(self):
@@ -49,6 +50,28 @@ class TestChess(unittest.TestCase):
         self.chess.move(0,0,1,0)
         self.assertEqual(self.chess.turn, "BLACK")
 
+    def test_end_game(self):
+        chess = Chess()
+        self.assertTrue(chess.is_playing())
+        chess.end_game()
+        self.assertFalse(chess.is_playing())
+    
+    def test_game_already_ended(self):
+        chess = Chess()
+        chess.end_game()
+        with self.assertRaises(GameAlreadyEnded):
+            chess.move(0,0,1,0)
+
+    def test_white_wins_by_capturing_black_king(self):
+        Board(for_test=True)
+        self.chess.__board__.set_piece(0, 0, King("BLACK", Board(for_test=True)))
+        self.chess.__board__.set_piece(7, 0, Rook("WHITE", Board(for_test=True)))
+        
+        result = self.chess.move(7, 0, 0, 0)
+        result = self.chess.change_turn()
+        result = self.chess.move(0, 0, 0, 4)
+
+        self.assertTrue(self.chess.__game_over__, "El juego debería haber terminado porque el rey negro fue capturado")
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,13 +1,17 @@
 from game.board import Board
-from game.exceptions import EmptyPosition, InvalidMove, InvalidTurn
+from game.exceptions import EmptyPosition, InvalidMove, InvalidTurn, GameAlreadyEnded
 
 class Chess:
     def __init__(self):
         self.__board__ = Board()
         self.__turn__ = "WHITE"
+        self.__game_over__ = False
 
     def is_playing(self):
-        return True
+        return not self.__game_over__
+
+    def end_game(self):
+        self.__game_over__ = True
 
     def move(
         self,
@@ -16,6 +20,9 @@ class Chess:
         to_row,
         to_col,
     ):
+        if self.__game_over__:
+            raise GameAlreadyEnded()
+
         # validate coords
         piece = self.__board__.get_piece(from_row, from_col)
         if not piece:
@@ -25,6 +32,14 @@ class Chess:
         if not piece.valid_positions(from_row, from_col, to_row, to_col):
             raise InvalidMove()
         self.__board__.move(from_row, from_col, to_row, to_col)
+        
+        opponent_color = 'BLACK' if self.__turn__ == 'WHITE' else 'WHITE'
+        if not self.__board__.is_king_alive(opponent_color):
+            print(f'El jugador {self.__turn__} ha ganado!')
+            print('Muchas gracias por jugar!')
+            self.end_game()
+
+
         self.change_turn()
 
     @property

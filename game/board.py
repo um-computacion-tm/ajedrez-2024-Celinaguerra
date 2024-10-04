@@ -42,7 +42,6 @@ class Board:
         self.set_piece(to_row, to_col, origin)
         self.set_piece(from_row, from_col, None)
 
-        #debería la promocion ser asignada en board?
         if isinstance(origin, Pawn) and (to_row == 0 or to_row == 7):
             self.set_piece(to_row, to_col, Queen(origin.__color__, self))
 
@@ -55,6 +54,14 @@ class Board:
 
     def set_piece(self, row, col, piece):
         self.__positions__[row][col] = piece
+
+    def is_king_alive(self,color):
+        for row in self.__positions__:
+            for piece in row:
+                if isinstance(piece,King) and piece.__color__ == color:
+                    return True
+        return False
+
 
     def __str__(self):
         header_footer = "  " + " ".join(str(i) for i in range(8)) + "\n"
