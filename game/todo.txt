@@ -1,1 +1,2 @@
 - empate
+- ver punto 5 y 6 req
