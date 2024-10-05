@@ -62,14 +62,34 @@ class Board:
                     return True
         return False
 
-
     def __str__(self):
-        header_footer = "  " + " ".join(str(i) for i in range(8)) + "\n"
+        # Encabezado y pie con los números de las columnas espaciados
+        header_footer = "    " + "   ".join(str(i) for i in range(8)) + "\n"
         board_str = header_footer
+        board_str += "  +" + "---+" * 8 + "\n"  # Línea superior del tablero
+        
+        # Construir el tablero con las piezas y las casillas vacías
         for i, row in enumerate(self.__positions__):
-            board_str += str(i) + " "
+            board_str += f"{i} |"  # Añadir el número de fila al inicio
             for cell in row:
-                board_str += str(cell) + " " if cell is not None else ". "
-            board_str += str(i) + "\n"
-        board_str += header_footer
+                if cell is None:
+                    board_str += "   |"  # Representación de casilla vacía
+                else:
+                    board_str += f" {str(cell)} |"  # Representación de la pieza
+            board_str += f" {i}\n"  # Añadir el número de fila al final
+            board_str += "  +" + "---+" * 8 + "\n"  # Añadir la línea divisoria entre filas
+        
+        board_str += header_footer  # Añadir el pie con los números de las columnas
         return board_str
+
+
+    # def __str__(self):
+    #     header_footer = "  " + " ".join(str(i) for i in range(8)) + "\n"
+    #     board_str = header_footer
+    #     for i, row in enumerate(self.__positions__):
+    #         board_str += str(i) + " "
+    #         for cell in row:
+    #             board_str += str(cell) + " " if cell is not None else ". "
+    #         board_str += str(i) + "\n"
+    #     board_str += header_footer
+    #     return board_str
