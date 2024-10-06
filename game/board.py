@@ -9,6 +9,16 @@ from game.exceptions import OutOfBoard
 
 class Board:
     def __init__(self, for_test = False):
+        """
+        Initializes the chess board with pieces in their starting positions.
+
+        Parameters:
+        for_test (bool): If True, the board is initialized empty for testing purposes. 
+        If False, the board is initialized with pieces in their standard starting positions.
+
+        Attributes:
+        __positions__ (list): A 2D list representing the board, where each element is either None or a chess piece object.
+        """
         self.__positions__ = []
         for _ in range(8):
             col = []
@@ -38,6 +48,18 @@ class Board:
 
 
     def move(self, from_row, from_col, to_row, to_col):
+        """
+        Moves a piece from one position to another on the board.
+
+        Parameters:
+        from_row (int): The row index of the piece's current position.
+        from_col (int): The column index of the piece's current position.
+        to_row (int): The row index of the piece's destination position.
+        to_col (int): The column index of the piece's destination position.
+
+        If the piece being moved is a Pawn and it reaches the opposite end of the board
+        (row 0 for white, row 7 for black), it is promoted to a Queen.
+        """
         origin = self.get_piece(from_row, from_col)
         self.set_piece(to_row, to_col, origin)
         self.set_piece(from_row, from_col, None)
@@ -46,6 +68,19 @@ class Board:
             self.set_piece(to_row, to_col, Queen(origin.__color__, self))
 
     def get_piece(self, row, col):
+        """
+        Retrieve the piece at the specified board position.
+
+        Args:
+            row (int): The row index of the board (0-7).
+            col (int): The column index of the board (0-7).
+
+        Returns:
+            Piece: The piece located at the specified position, or None if the position is empty.
+
+        Raises:
+            OutOfBoard: If the specified position is outside the valid board range.
+        """
         if not (
             0 <= row < 8 or 0 <= col < 8
         ):
@@ -53,9 +88,26 @@ class Board:
         return self.__positions__[row][col]
 
     def set_piece(self, row, col, piece):
+        """
+        Places a piece on the board at the specified row and column.
+
+        Args:
+            row (int): The row index where the piece will be placed.
+            col (int): The column index where the piece will be placed.
+            piece (Piece): The piece to be placed on the board.
+        """
         self.__positions__[row][col] = piece
 
     def is_king_alive(self,color):
+        """
+        Check if the king of the specified color is still alive on the board.
+
+        Args:
+            color (str): The color of the king to check for (e.g., 'white' or 'black').
+
+        Returns:
+            bool: True if the king of the specified color is found on the board, False otherwise.
+        """
         for row in self.__positions__:
             for piece in row:
                 if isinstance(piece,King) and piece.__color__ == color:
@@ -63,6 +115,14 @@ class Board:
         return False
 
     def __str__(self):
+        """
+        Returns a string representation of the chess board.
+        The board is displayed with column numbers at the top and bottom, and row numbers
+        at the beginning and end of each row. Each cell is represented by either a piece
+        or an empty space.
+        Returns:
+            str: The string representation of the chess board.
+        """
         # Encabezado y pie con los números de las columnas espaciados
         header_footer = "    " + "   ".join(str(i) for i in range(8)) + "\n"
         board_str = header_footer
@@ -81,15 +141,3 @@ class Board:
         
         board_str += header_footer  # Añadir el pie con los números de las columnas
         return board_str
-
-
-    # def __str__(self):
-    #     header_footer = "  " + " ".join(str(i) for i in range(8)) + "\n"
-    #     board_str = header_footer
-    #     for i, row in enumerate(self.__positions__):
-    #         board_str += str(i) + " "
-    #         for cell in row:
-    #             board_str += str(cell) + " " if cell is not None else ". "
-    #         board_str += str(i) + "\n"
-    #     board_str += header_footer
-    #     return board_str
