@@ -46,6 +46,18 @@ class Board:
                 self.__positions__[1][col] = Pawn("BLACK",self)
                 self.__positions__[6][col] = Pawn("WHITE",self)
 
+    def validate_position_in_board(self, row, col):
+        """
+        Check if the specified position is within the bounds of the chess board.
+
+        Args:
+            row (int): The row index to check.
+            col (int): The column index to check.
+
+        Returns:
+            bool: True if the position is within the board, False otherwise.
+        """
+        return 0 <= row < 8 and 0 <= col < 8
 
     def move(self, from_row, from_col, to_row, to_col):
         """
@@ -81,9 +93,7 @@ class Board:
         Raises:
             OutOfBoard: If the specified position is outside the valid board range.
         """
-        if not (
-            0 <= row < 8 or 0 <= col < 8
-        ):
+        if not self.validate_position_in_board(row, col):
             raise OutOfBoard()
         return self.__positions__[row][col]
 

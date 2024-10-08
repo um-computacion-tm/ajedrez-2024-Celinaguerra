@@ -47,23 +47,19 @@ class TestBoard(unittest.TestCase):
         except InvalidMove as e:
             self.fail(f"move_piece() raised InvalidMoveError unexpectedly! {e}")
 
-    # def test_str_board(self):
-    #     board = Board()
-    #     self.assertEqual(
-    #         str(board),
-    #         (
-    #             "  0 1 2 3 4 5 6 7\n"
-    #             "0 ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 0\n"
-    #             "1 ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 1\n"
-    #             "2 . . . . . . . . 2\n"
-    #             "3 . . . . . . . . 3\n"
-    #             "4 . . . . . . . . 4\n"
-    #             "5 . . . . . . . . 5\n"
-    #             "6 ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 6\n"
-    #             "7 ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 7\n"
-    #             "  0 1 2 3 4 5 6 7\n"
-    #         )
-    #     )
+    def test_get_piece(self):
+        board = Board(for_test=True)
+        board.set_piece(0,0, Rook('WHITE', board))
+        new_piece = board.get_piece(0,0)
+        self.assertIsInstance(new_piece , Rook)
+
+    def test_get_piece_raise_out_of_board(self):
+        board = Board(for_test=True)
+        with self.assertRaises(OutOfBoard) as exc:
+            new_piece = board.get_piece(0,10)
+        self.assertEqual(str(exc.exception), "La posicion indicada se encuentra fuera del tablero")
+
+
 
     def test_str_board(self):
         board = Board()

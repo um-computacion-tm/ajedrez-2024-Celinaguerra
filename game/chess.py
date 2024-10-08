@@ -1,5 +1,5 @@
 from game.board import Board
-from game.exceptions import EmptyPosition, InvalidMove, InvalidTurn, GameAlreadyEnded
+from game.exceptions import EmptyPosition, InvalidMove, InvalidTurn, GameAlreadyEnded, OutOfBoard
 
 class Chess:
     def __init__(self):
@@ -52,6 +52,8 @@ class Chess:
             raise GameAlreadyEnded()
 
         # validate coords
+        if not self.__board__.validate_position_in_board(to_row, to_col):
+            raise OutOfBoard()
         piece = self.__board__.get_piece(from_row, from_col)
         if not piece:
             raise EmptyPosition()
@@ -61,12 +63,10 @@ class Chess:
             raise InvalidMove()
         self.__board__.move(from_row, from_col, to_row, to_col)
         
+
+    def validate_opponent_king_alive(self):
         opponent_color = 'BLACK' if self.__turn__ == 'WHITE' else 'WHITE'
-        if not self.__board__.is_king_alive(opponent_color):
-            print(f'El jugador {self.__turn__} ha ganado!')
-            print('Muchas gracias por jugar!')
-            self.end_game()
-        self.change_turn()
+        return self.__board__.is_king_alive(opponent_color)
 
     @property
     def turn(self):
@@ -100,14 +100,13 @@ class Chess:
         else:
             self.__turn__ = "WHITE"
 
-    def offer_draw(self):
-        draw = input(f'{self.turn.capitalize()}, Do you wish to draw? Enter "y" to propose, else any key: ').strip().lower()
-        if draw == 'y':
-            opponent = 'WHITE' if self.turn == 'BLACK' else 'BLACK'
-            confirm_surrender = input(f'{opponent}, {self.turn} wants to draw. Do you accept the draw? (y/n): ').strip().lower()
-            if confirm_surrender == 'y':
-                print(f'The game has ended in a draw. Thanks for playing!')
-                self.end_game()
-                return
-            else:
-                print(f'{opponent} rejected the draw. Continue playing.')
+    # def offer_draw(self):
+    #     draw = input(f'{self.turn.capitalize()}, Do you wish to draw? Enter "y" to propose, else any key: ').strip().lower()
+    #     if draw == 'y':
+    #         opponent = 'WHITE' if self.turn == 'BLACK' else 'BLACK'
+    #         confirm_surrender = input(f'{opponent}, {self.turn} wants to draw. Do you accept the draw? (y/n): ').strip().lower()
+    #         if confirm_surrender == 'y':
+    #             print(f'The game has ended in a draw. Thanks for playing!')
+    #             self.end_game()
+    #         else:
+    #             print(f'{opponent} rejected the draw. Continue playing.')

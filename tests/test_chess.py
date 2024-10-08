@@ -48,6 +48,7 @@ class TestChess(unittest.TestCase):
         Board(for_test=True)
         self.chess.__board__.set_piece(0, 0, Rook("WHITE",Board(for_test=True)))
         self.chess.move(0,0,1,0)
+        self.chess.change_turn()
         self.assertEqual(self.chess.turn, "BLACK")
 
     def test_end_game(self):
@@ -61,17 +62,6 @@ class TestChess(unittest.TestCase):
         chess.end_game()
         with self.assertRaises(GameAlreadyEnded):
             chess.move(0,0,1,0)
-
-    def test_white_wins_by_capturing_black_king(self):
-        Board(for_test=True)
-        self.chess.__board__.set_piece(0, 0, King("BLACK", Board(for_test=True)))
-        self.chess.__board__.set_piece(7, 0, Rook("WHITE", Board(for_test=True)))
-        
-        result = self.chess.move(7, 0, 0, 0)
-        result = self.chess.change_turn()
-        result = self.chess.move(0, 0, 0, 4)
-
-        self.assertTrue(self.chess.__game_over__, "El juego debería haber terminado porque el rey negro fue capturado")
 
     def test_show_board(self):
         expected_output = (
