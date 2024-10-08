@@ -88,8 +88,6 @@ class TestBoard(unittest.TestCase):
             )
         )
 
-
-
     def test_promotion_queen_white(self):
         board = Board(for_test=True)
         pawn = Pawn('WHITE', board)

@@ -1,5 +1,4 @@
 from game.piece import Piece
-from game.queen import Queen
 
 class Pawn(Piece):
     white_str = '♙'
@@ -70,7 +69,6 @@ class Pawn(Piece):
         """
         direction = 1 if self.__color__ == "BLACK" else -1
         start_row = 1 if self.__color__ == "BLACK" else 6
-        # end_row = 7 if self.__color__ == "BLACK" else 0
         positions = []
 
         if self.__board__.get_piece(from_row + direction, from_col) is None:
@@ -78,7 +76,4 @@ class Pawn(Piece):
             positions.append((next_row, from_col))
             if from_row == start_row and self.__board__.get_piece(from_row + 2 * direction, from_col) is None:
                 positions.append((from_row + 2 * direction, from_col))
-            # # Promoción a reina
-            # if next_row == end_row:
-            #     self.__board__.set_piece(next_row, from_col, Queen(self.__color__, self.__board__))
         return positions

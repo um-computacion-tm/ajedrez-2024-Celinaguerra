@@ -9,30 +9,6 @@ class TestBishop(unittest.TestCase):
         bishop = Bishop('WHITE', board)
         self.assertEqual(str(bishop), '♗')
 
-    # def test_move_diag_right_up(self):
-    #     board = Board()
-    #     bishop = Bishop('WHITE', board)
-    #     possibles = bishop.diag_possible_positions(4,4,-1,1)
-    #     self.assertEqual(possibles, [(3,5),(2,6),(1,7)])
-
-    # def test_move_diag_right_down(self):
-    #     board = Board(for_test=True)
-    #     bishop = Bishop('WHITE', board)
-    #     possibles = bishop.diag_possible_positions(4,4,1,1)
-    #     self.assertEqual(possibles, [(5,5),(6,6),(7,7)])
-
-    # def test_move_diag_left_up(self):
-    #     board = Board(for_test=True)
-    #     bishop = Bishop('WHITE', board)
-    #     possibles = bishop.diag_possible_positions(4,4,-1,-1)
-    #     self.assertEqual(possibles, [(3,3),(2,2),(1,1),(0,0)])
-
-    # def test_move_diag_left_down(self):
-    #     board = Board(for_test=True)
-    #     bishop = Bishop('WHITE', board)
-    #     possibles = bishop.diag_possible_positions(4,4,1,-1)
-    #     self.assertEqual(possibles, [(5,3),(6,2),(7,1)])
-
 
     def test_move_all_possible_positions(self):
         board = Board(for_test=True)
