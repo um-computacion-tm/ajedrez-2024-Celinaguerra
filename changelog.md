@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.1] - 2024-10-08
 ### Added
 
+- completed README
 - validate_opponent_king_alive in chess.py
 - draw offer in cli
 

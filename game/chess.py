@@ -99,14 +99,3 @@ class Chess:
             self.__turn__ = "BLACK"
         else:
             self.__turn__ = "WHITE"
-
-    # def offer_draw(self):
-    #     draw = input(f'{self.turn.capitalize()}, Do you wish to draw? Enter "y" to propose, else any key: ').strip().lower()
-    #     if draw == 'y':
-    #         opponent = 'WHITE' if self.turn == 'BLACK' else 'BLACK'
-    #         confirm_surrender = input(f'{opponent}, {self.turn} wants to draw. Do you accept the draw? (y/n): ').strip().lower()
-    #         if confirm_surrender == 'y':
-    #             print(f'The game has ended in a draw. Thanks for playing!')
-    #             self.end_game()
-    #         else:
-    #             print(f'{opponent} rejected the draw. Continue playing.')
